@@ -1,0 +1,6 @@
+[submodule "loam_velodyne"]
+	path = loam_velodyne
+	url = git@github.com:chienerh/loam_velodyne.git
+[submodule "LeGO-LOAM"]
+	path = LeGO-LOAM
+	url = git@github.com:chienerh/LeGO-LOAM.git
