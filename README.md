@@ -4,6 +4,9 @@ This is Team 11's final project git repository for NAVARCH/EECS 568, ROB 530: Mo
 ## Abstract
 LeGO-LOAM, a lightweight and ground-optimized lidar odometry and mapping method, is able to do six degree-of-freedom pose estimation for real time with ground vehicles. This project will evaluate the LeGO-LOAM which reduced computational expense while keeping similar accuracy compared to LOAM method. The whole LeGO-LOAM system is implemented in Robot Operating System (ROS). The data used for simulation is raw data (with Velodyne LiDAR data and IMU) from [KITTI odometry benchmark dataset](http://www.cvlibs.net/datasets/kitti/), [utbm dataset](https://epan-utbm.github.io/utbm_robocar_dataset/) and [KAIST Urban Dataset](http://irap.kaist.ac.kr/dataset/). We compared the mapping and odometry results of these data, and analysis the relative motion and mapping error in this report. 
 
+## Evaluation Result & Conclusion
+The evaluation result on KITTI data set illustrates that position estimation error for odometry is acceptable (around 10 m) and that mapping result can provide concise but adequate information of the environment. By comparing with LOAM, LeGO-LOAM provides better accuracy on mapping and odometry tracking (both rotational and translational), and more efficient since filtering the unreliable point cloud. It is also observed that the loop closure reduces the error in odometry for LeGO-LOAM, and LOAM does not have loop closure ability. However, when the drift is large within a short time (such as sharp turn), the performance of LeGO-LOAM is negatively affected. In addition, from the test on UTBM, LeGO-LOAM also has a limited mapping and tracking ability for the roundabout trajectory. 
+
 ## Getting Started
 We recommend you read through the original [LOAM paper](http://www.roboticsproceedings.org/rss10/p07.pdf) by Ji Zhang and Sanjiv Singh and the original [LeGO-LOAM paper](http://personal.stevens.edu/~benglot/Shan_Englot_IROS_2018_Preprint.pdf) by Tixiao Shan and Brendan Englot. These will give you theoretical understanding of the LOAM and LeGO-LOAM algorithm.
 
@@ -82,15 +85,16 @@ rosbag play PATH_TO_BAG_FILE.bag
 - Rostopic of KAIST dataset point cloud topic is `"/ns1/velodyne_points"`, so remap `"/multi_scan_points"` to `"/ns1/velodyne_points"` in `loam_velodyne.launch`.
 
 ## Result
+### LeGO-LOAM
 ![seq00](/result/00_cmp.png)
 ![seq00](/result/00.png)
-![seq00](/result/00_error.png)
-![seq05](/result/05_cmp.png)
-![seq05](/result/05.png)
-![seq05](/result/05_error.png)
 ![seq08](/result/08_cmp.png)
 ![seq08](/result/08.png)
-![seq08](/result/08_error.png)
+![seq05](/result/05_cmp.png)
+![seq05](/result/05.png)
+### LOAM
+![loam_seq05](loam_05.png)
+![loam_seq05](loam_seq_05.png)
 
 ## APPENDIX
 ### How to download and transform kitti to rosbag
