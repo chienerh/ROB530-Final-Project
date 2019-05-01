@@ -92,16 +92,20 @@ rosbag play PATH_TO_BAG_FILE.bag
 - Rostopic of KAIST dataset point cloud topic is `"/ns1/velodyne_points"`, so remap `"/multi_scan_points"` to `"/ns1/velodyne_points"` in `loam_velodyne.launch`.
 
 ## Result
-### LeGO-LOAM
+### Kitti Dataset
+#### LeGO-LOAM
 ![seq00](/result/00_cmp.png)
 ![seq00](/result/00.png)
 ![seq08](/result/08_cmp.png)
 ![seq08](/result/08.png)
 ![seq05](/result/05_cmp.png)
 ![seq05](/result/05.png)
-### LOAM
-![loam_seq05](loam_05.png)
-![loam_seq05](loam_seq_05.png)
+#### LOAM
+![loam_seq05](/result/loam_05.png)
+![loam_seq05](/result/loam_seq_05.png)
+### UTBM Dataset
+![lego_utbm](/result/utbm_round_odo.png)
+![lego_utbm2](/result/utbm_round_odo2.png)
 
 ## APPENDIX
 ### How to download and transform kitti to rosbag
