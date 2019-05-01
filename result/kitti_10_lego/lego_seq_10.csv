@@ -1,0 +1,61 @@
+[0m[ INFO] [1556640003.484122047]: [1;32m---->[0m Image Projection Started.[0m
+[0m[ INFO] [1556640003.509361470]: [1;32m---->[0m Transform Fusion Started.[0m
+[0m[ INFO] [1556640003.485510289]: [1;32m---->[0m Feature Association Started.[0m
+[0m[ INFO] [1556640003.489743245]: [1;32m---->[0m Map Optimization Started.[0m
+pubLaserCloudSurround.getNumSubscribers() == 0
+... logging to /home/justin/.ros/log/0391cfde-6b61-11e9-814a-9cb6d0b9893f/roslaunch-justin-xps-23313.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/justin/catkin_ws/src/LeGO-LOAM/LeGO-LOAM/launch/run.launch
+[1mstarted roslaunch server http://justin-xps:39731/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /rosdistro: kinetic
+ * /rosversion: 1.12.14
+ * /use_sim_time: True
+
+NODES
+  /
+    base_link_to_camera (tf/static_transform_publisher)
+    camera_init_to_map (tf/static_transform_publisher)
+    featureAssociation (lego_loam/featureAssociation)
+    imageProjection (lego_loam/imageProjection)
+    mapOptmization (lego_loam/mapOptmization)
+    player (rosbag/play)
+    rviz (rviz/rviz)
+    transformFusion (lego_loam/transformFusion)
+
+auto-starting new master
+[1mprocess[master]: started with pid [23323][0m
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/justin/catkin_ws/src/LeGO-LOAM/LeGO-LOAM/launch/run.launch http://localhost:11311
+[1msetting /run_id to 0391cfde-6b61-11e9-814a-9cb6d0b9893f[0m
+[1mprocess[rosout-1]: started with pid [23336][0m
+started core service [/rosout]
+[1mprocess[rviz-2]: started with pid [23344][0m
+[1mprocess[camera_init_to_map-3]: started with pid [23357][0m
+[1mprocess[base_link_to_camera-4]: started with pid [23362][0m
+[1mprocess[imageProjection-5]: started with pid [23371][0m
+[1mprocess[featureAssociation-6]: started with pid [23388][0m
+[1mprocess[mapOptmization-7]: started with pid [23399][0m
+[1mprocess[transformFusion-8]: started with pid [23414][0m
+[1mprocess[player-9]: started with pid [23428][0m
+[1m[player-9] process has finished cleanly
+log file: /home/justin/.ros/log/0391cfde-6b61-11e9-814a-9cb6d0b9893f/player-9*.log[0m
+[1m[rviz-2] process has finished cleanly
+log file: /home/justin/.ros/log/0391cfde-6b61-11e9-814a-9cb6d0b9893f/rviz-2*.log[0m
+[transformFusion-8] killing on exit
+[mapOptmization-7] killing on exit
+[featureAssociation-6] killing on exit
+[base_link_to_camera-4] killing on exit
+[imageProjection-5] killing on exit
+[camera_init_to_map-3] killing on exit
+[rosout-1] killing on exit
+[master] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m

@@ -1,0 +1,55 @@
+[0m[ INFO] [1556557029.612392515]: Set scanPeriod: 0.1[0m
+[0m[ INFO] [1556557029.607429400]: Set scanPeriod: 0.1[0m
+[0m[ INFO] [1556557029.569719180]: Set scanPeriod: 0.1[0m
+[0m[ INFO] [1556557029.682172789]: Set  VLP-16  scan mapper.[0m
+... logging to /home/chienerh/.ros/log/d331a420-6a9f-11e9-85fd-001c4250c291/roslaunch-parallels-vm-6491.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/chienerh/catkin_ws/src/loam_velodyne/launch/loam_velodyne.launch
+[1mstarted roslaunch server http://parallels-vm:41387/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /laserMapping/scanPeriod: 0.1
+ * /laserOdometry/scanPeriod: 0.1
+ * /multiScanRegistration/lidar: VLP-16
+ * /multiScanRegistration/scanPeriod: 0.1
+ * /rosdistro: kinetic
+ * /rosversion: 1.12.14
+
+NODES
+  /
+    laserMapping (loam_velodyne/laserMapping)
+    laserOdometry (loam_velodyne/laserOdometry)
+    multiScanRegistration (loam_velodyne/multiScanRegistration)
+    record (rosbag/record)
+    rviz (rviz/rviz)
+    transformMaintenance (loam_velodyne/transformMaintenance)
+
+auto-starting new master
+[1mprocess[master]: started with pid [6504][0m
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/chienerh/catkin_ws/src/loam_velodyne/launch/loam_velodyne.launch http://localhost:11311
+[1msetting /run_id to d331a420-6a9f-11e9-85fd-001c4250c291[0m
+[1mprocess[rosout-1]: started with pid [6517][0m
+started core service [/rosout]
+[1mprocess[multiScanRegistration-2]: started with pid [6524][0m
+[1mprocess[laserOdometry-3]: started with pid [6526][0m
+[1mprocess[laserMapping-4]: started with pid [6535][0m
+[1mprocess[transformMaintenance-5]: started with pid [6537][0m
+[1mprocess[rviz-6]: started with pid [6538][0m
+[1mprocess[record-7]: started with pid [6539][0m
+[record-7] killing on exit
+[rviz-6] killing on exit
+[laserMapping-4] killing on exit
+[transformMaintenance-5] killing on exit
+[laserOdometry-3] killing on exit[multiScanRegistration-2] killing on exit
+
+[rosout-1] killing on exit
+[master] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m
