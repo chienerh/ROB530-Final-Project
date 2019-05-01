@@ -8,7 +8,7 @@ LeGO-LOAM, a lightweight and ground-optimized lidar odometry and mapping method,
 We recommend you read through the original [LOAM paper](http://www.roboticsproceedings.org/rss10/p07.pdf) by Ji Zhang and Sanjiv Singh and the original [LeGO-LOAM paper](http://personal.stevens.edu/~benglot/Shan_Englot_IROS_2018_Preprint.pdf) by Tixiao Shan and Brendan Englot. These will give you theoretical understanding of the LOAM and LeGO-LOAM algorithm.
 
 ## LeGO-LOAM
-The [LeGO-LOAM repository](https://github.com/chienerh/LeGO-LOAM) is forked by [RobustFieldAutonomyLab/LeGO-LOAM](https://github.com/RobustFieldAutonomyLab/LeGO-LOAM). We changed it to be able to run kitti dataset.
+The [LeGO-LOAM repository](https://github.com/chienerh/LeGO-LOAM) is forked from [RobustFieldAutonomyLab/LeGO-LOAM](https://github.com/RobustFieldAutonomyLab/LeGO-LOAM). We changed it to be able to run kitti dataset.
 
 ### Prerequisites
 - First, install [ROS](http://wiki.ros.org/ROS/Installation). We used ROS-kinetic on Ubuntu 16.04. Please follow the instruction of ROS installation page.
