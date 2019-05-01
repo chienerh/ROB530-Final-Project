@@ -2,7 +2,7 @@
 This is Team 11's final project git repository for NAVARCH/EECS 568, ROB 530: Mobile Robotics. The title of our project is **Evaluation of LeGO-LOAM: Lightweight and Ground-Optimized Lidar Odometry and Mapping**. Team members include: Bowen Mu, Chien Erh Lin, Haochen Wu, and Weilin Xu.
 
 ## Abstract
-LeGO-LOAM, a lightweight and ground-optimized lidar odometry and mapping method, is able to do six degree-of-freedom pose estimation for real time with ground vehicles. This project will evaluate the LeGO-LOAM which reduced computational expense while keeping similar accuracy compared to LOAM method. The whole LeGO-LOAM system is implemented in Robot Operating System (ROS). The data used for simulation is raw data (with Velodyne LiDAR data and IMU) from [KITTI odometry benchmark dataset](http://www.cvlibs.net/datasets/kitti/), [utbm dataset](https://epan-utbm.github.io/utbm_robocar_dataset/) and [KAIST Urban Dataset](http://irap.kaist.ac.kr/dataset/). We compared the mapping and odometry results of these data, and analysis the relative motion and mapping error in this report. 
+LeGO-LOAM, a lightweight and ground-optimized lidar odometry and mapping method, is able to do six degree-of-freedom pose estimation for real time with ground vehicles. This project will evaluate the LeGO-LOAM which reduced computational expense while keeping similar accuracy compared to LOAM method. The whole LeGO-LOAM system is implemented in Robot Operating System (ROS). The data used for simulation is raw data (with Velodyne LiDAR data and IMU) from [KITTI Odometry Benchmark Dataset](http://www.cvlibs.net/datasets/kitti/), [UTBM Dataset](https://epan-utbm.github.io/utbm_robocar_dataset/) and [KAIST Urban Dataset](http://irap.kaist.ac.kr/dataset/). We compared the mapping and odometry results of these data, and analysis the relative motion and mapping error in this report. 
 
 ## Evaluation Result & Conclusion
 The evaluation result on KITTI data set illustrates that position estimation error for odometry is acceptable (around 10 m) and that mapping result can provide concise but adequate information of the environment. By comparing with LOAM, LeGO-LOAM provides better accuracy on mapping and odometry tracking (both rotational and translational), and more efficient since filtering the unreliable point cloud. It is also observed that the loop closure reduces the error in odometry for LeGO-LOAM, and LOAM does not have loop closure ability. However, when the drift is large within a short time (such as sharp turn), the performance of LeGO-LOAM is negatively affected. In addition, from the test on UTBM, LeGO-LOAM also has a limited mapping and tracking ability for the roundabout trajectory. 
@@ -57,9 +57,10 @@ extern const int groundScanInd = 50;
 - Sample ros bag files from [this link](https://drive.google.com/open?id=1wROSNkyXATcOJRplCn-BQF1gF7OhDCha) and put it in your own `PATH_TO_BAG_FILE` folder. 
 - Currently for our kitti rosbag, lidar topic name is `/kitti/velo/pointcloud`, and the imu topic name is `/kitti/oxts/imu`. Change topic names from these two to the topic name in your the rosbag if these are not the correct topic names in `run.launch` file line 16 and the rosbag play command.
 
-### LeGO-LOAM with utbm dataset
+### LeGO-LOAM with UTBM Dataset
+- According to [this repository](https://github.com/epan-utbm/utbm_robocar_dataset/tree/baselines/LeGO-LOAM/LeGO-LOAM)
 - rosbag can be downloaded on their [website](https://epan-utbm.github.io/utbm_robocar_dataset/)
-- install [GPS driver](https://github.com/epan-utbm/utbm_robocar_dataset/tree/baselines/magellan_proflex500)
+- `roslaunch lego_loam lego_loam_utbm.launch bag:=PATH_TO_BAG`
 
 ## LOAM
 The [loam_velodyne repository](https://github.com/chienerh/loam_velodyne) is forked from [laboshinl's version of LOAM](https://github.com/laboshinl/loam_velodyne). We changed it to be able to run kitti dataset.
@@ -79,6 +80,12 @@ rosbag play PATH_TO_BAG_FILE.bag
 ### LOAM with KITTI data
 - Rostopic of kitti point cloud is "/kitti/velo/pointcloud", so remap "/multi_scan_points" to "/kitti/velo/pointcloud" in `loam_velodyne.launch`.
 - Set lidar to be "VLP-16" in `loam_velodyne.launch`.
+
+### LOAM with UTBM Dataset
+- According to [this repository](https://github.com/epan-utbm/utbm_robocar_dataset/tree/baselines/loam_velodyne)
+- rosbag can be downloaded on their [website](https://epan-utbm.github.io/utbm_robocar_dataset/)
+- install [GPS driver](https://github.com/epan-utbm/utbm_robocar_dataset/tree/baselines/magellan_proflex500)
+- `roslaunch loam_velodyne loam_velodyne_utbm.launch bag:=PATH_TO_BAG`
 
 ### LOAM with KAIST Dataset
 - Use [File Player](https://github.com/irapkaist/file_player) to publish KAIST data into ros message.
