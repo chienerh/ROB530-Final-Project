@@ -40,14 +40,13 @@ rosbag play PATH_TO_BAG_FILE.bag --clock --topic /kitti/velo/pointcloud /kitti/o
 ```
 
 ### LeGO-LOAM with KITTI Data
-Sample ros bag files from [this link](https://drive.google.com/open?id=1wROSNkyXATcOJRplCn-BQF1gF7OhDCha) and put it in your own `PATH_TO_BAG_FILE` folder. 
-Change topic names from `/kitti/velo/pointcloud` to the topic name in your the rosbag if these are not the correct topic names in `run.launch file` line 16. Currently for our kitti rosbag, lidar topic name is `/kitti/velo/pointcloud`, and the imu topic name is `/kitti/oxts/imu`. Then run the launch file with the below code.
+- Followed [this issue](https://github.com/RobustFieldAutonomyLab/LeGO-LOAM/issues/12), we modified the file to run kitti data with better performance.
+- Sample ros bag files from [this link](https://drive.google.com/open?id=1wROSNkyXATcOJRplCn-BQF1gF7OhDCha) and put it in your own `PATH_TO_BAG_FILE` folder. 
+- Currently for our kitti rosbag, lidar topic name is `/kitti/velo/pointcloud`, and the imu topic name is `/kitti/oxts/imu`. Change topic names from these two to the topic name in your the rosbag if these are not the correct topic names in `run.launch` file line 16 and the rosbag play command.
 
-The odmetry result in saved `PATH_TO_TXT_FILE.txt` and also in `./src/LeGO-LOAM/result/bag/`. This .bag file can transformed to .csv file by:
-```
-python ./src/LeGO-LOAM/result/process_rosbag.py
-```
-Afterwards, you can use `./src/result_plot.m` in the repo to plot and compare `PATH_TO_TXT_FILE.txt` and the ground truth odemetry txt file. You need to change variables `res_file` and `groundTruthFile` in this MATLAB to the correct name of `PATH_TO_TXT_FILE.txt` and ground truth odemetry txt.
+### LeGO-LOAM with utbm dataset
+- rosbag can be downloaded on their [website](https://epan-utbm.github.io/utbm_robocar_dataset/)
+- install [GPS driver](https://github.com/epan-utbm/utbm_robocar_dataset/tree/baselines/magellan_proflex500)
 
 ## LOAM
 The [loam_velodyne repository](https://github.com/chienerh/loam_velodyne) is forked from [laboshinl's version of LOAM](https://github.com/laboshinl/loam_velodyne). We changed it to be able to run kitti dataset.
@@ -64,37 +63,12 @@ source ~/catkin_ws/devel/setup.bash
 roslaunch loam_velodyne loam_velodyne.launch
 rosbag play PATH_TO_BAG_FILE.bag 
 ```
-
 ### LOAM with KITTI data
 - rostopic of kitti point cloud is "/kitti/velo/pointcloud", so remap "/multi_scan_points" to "/kitti/velo/pointcloud" in loam_velodyne.launch.
 
-## How to save the odometry result
-- in launch file, add 
-```
-  <!-- rosbag arg -->
-  <arg name="ros_bag_name" default="simulation_res"/>
-```
-```
-  <node pkg="rosbag" type="record" name="record" args="record -O /home/USER_NAME/catkin_ws/src/loam_velodyne/result/bag/$(arg ros_bag_name).bag
-                                                	/integrated_to_init
-							/groundtruth_pose/pose"/>/
-```
-- to save odometry result, in src/lib/TransformMaintence.cpp line 79, add
-```
-   printf("%f, %f, %f\n", transformMapped()[3], transformMapped()[4], transformMapped()[5]);
-```
-Then run launch file with this command
-```
-roslaunch loam_velodyne loam_velodyne.launch > PATH_TO_FILE.csv
-```
-
-## LeGO-LOAM with utbm dataset
-- rosbag can be downloaded on their [website](https://epan-utbm.github.io/utbm_robocar_dataset/)
-- install [GPS driver](https://github.com/epan-utbm/utbm_robocar_dataset/tree/baselines/magellan_proflex500)
-
-## LOAM with KAIST Dataset
+### LOAM with KAIST Dataset
 - Use [File Player](https://github.com/irapkaist/file_player) to publish KAIST data into ros message.
-- rostopic of KAIST dataset point cloud topic is "/ns1/velodyne_points", so remap "/multi_scan_points" to "/ns1/velodyne_points" in loam_velodyne.launch.
+- rostopic of KAIST dataset point cloud topic is `"/ns1/velodyne_points"`, so remap `"/multi_scan_points"` to `"/ns1/velodyne_points"` in `loam_velodyne.launch`.
 
 ## Result
 ![seq00](/result/00_cmp.png)
@@ -130,3 +104,28 @@ has been used to extract the visual odometry / SLAM training set
 | 08 | 2011_09_30_drive_0028 | 001100 | 005170 | Residential | 20.0 GB |
 | 09 | 2011_09_30_drive_0033 | 000000 | 001590 | Residential | 6.2 GB |
 | 10 | 2011_09_30_drive_0034 | 000000 | 001200 | Residential | 4.8 GB |
+
+### How to save the odometry result
+- in launch file, add 
+```
+  <!-- rosbag arg -->
+  <arg name="ros_bag_name" default="simulation_res"/>
+```
+```
+  <node pkg="rosbag" type="record" name="record" args="record -O /home/USER_NAME/catkin_ws/src/loam_velodyne/result/bag/$(arg ros_bag_name).bag
+                                                	/integrated_to_init
+							/groundtruth_pose/pose"/>/
+```
+- to save odometry result, in src/lib/TransformMaintence.cpp line 79, add
+```
+   printf("%f, %f, %f\n", transformMapped()[3], transformMapped()[4], transformMapped()[5]);
+```
+Then run launch file with this command outputing file to a csv
+```
+roslaunch loam_velodyne loam_velodyne.launch > PATH_TO_FILE.csv
+```
+The odmetry result in saved `PATH_TO_TXT_FILE.txt` and also in `./src/LeGO-LOAM/result/bag/`. This .bag file can transformed to .csv file by:
+```
+python ./src/LeGO-LOAM/result/process_rosbag.py
+```
+Afterwards, you can use `./src/result_plot.m` in the repo to plot and compare `PATH_TO_TXT_FILE.txt` and the ground truth odemetry txt file. You need to change variables `res_file` and `groundTruthFile` in this MATLAB to the correct name of `PATH_TO_TXT_FILE.txt` and ground truth odemetry txt.
