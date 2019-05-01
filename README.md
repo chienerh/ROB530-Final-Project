@@ -40,7 +40,17 @@ rosbag play PATH_TO_BAG_FILE.bag --clock --topic /kitti/velo/pointcloud /kitti/o
 ```
 
 ### LeGO-LOAM with KITTI Data
-- Followed [this issue](https://github.com/RobustFieldAutonomyLab/LeGO-LOAM/issues/12), we modified the file to run kitti data with better performance.
+- Kitti ran with DHL-64E, so change parameters in utility.h
+```
+extern const int N_SCAN = 64;
+extern const int Horizon_SCAN = 1800;
+extern const float ang_res_x = 0.2;
+extern const float ang_res_y = 0.427;
+extern const float ang_bottom = 24.9;
+extern const int groundScanInd = 50;
+```
+- In `featureAssociation.cpp` line 849 TransformToStart(), `float s = 1;`
+- In `featureAssociation.cpp` line 1752 and 1758, disable TransformToEnd()
 - Sample ros bag files from [this link](https://drive.google.com/open?id=1wROSNkyXATcOJRplCn-BQF1gF7OhDCha) and put it in your own `PATH_TO_BAG_FILE` folder. 
 - Currently for our kitti rosbag, lidar topic name is `/kitti/velo/pointcloud`, and the imu topic name is `/kitti/oxts/imu`. Change topic names from these two to the topic name in your the rosbag if these are not the correct topic names in `run.launch` file line 16 and the rosbag play command.
 
@@ -64,11 +74,12 @@ roslaunch loam_velodyne loam_velodyne.launch
 rosbag play PATH_TO_BAG_FILE.bag 
 ```
 ### LOAM with KITTI data
-- rostopic of kitti point cloud is "/kitti/velo/pointcloud", so remap "/multi_scan_points" to "/kitti/velo/pointcloud" in loam_velodyne.launch.
+- Rostopic of kitti point cloud is "/kitti/velo/pointcloud", so remap "/multi_scan_points" to "/kitti/velo/pointcloud" in `loam_velodyne.launch`.
+- Set lidar to be "VLP-16" in `loam_velodyne.launch`.
 
 ### LOAM with KAIST Dataset
 - Use [File Player](https://github.com/irapkaist/file_player) to publish KAIST data into ros message.
-- rostopic of KAIST dataset point cloud topic is `"/ns1/velodyne_points"`, so remap `"/multi_scan_points"` to `"/ns1/velodyne_points"` in `loam_velodyne.launch`.
+- Rostopic of KAIST dataset point cloud topic is `"/ns1/velodyne_points"`, so remap `"/multi_scan_points"` to `"/ns1/velodyne_points"` in `loam_velodyne.launch`.
 
 ## Result
 ![seq00](/result/00_cmp.png)
